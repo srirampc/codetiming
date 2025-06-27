@@ -33,6 +33,30 @@ else:
     class FloatArg:
         """Dummy runtime class"""
 
+class TimerConfig:
+    """Global Configuration Settings."""
+    __enable: bool = True ## Configurion to enable/disable all timers
+
+    @classmethod
+    def enable_timers(cls):
+        """Enable all Timers."""
+        cls.__enable = True
+
+    @classmethod
+    def disable_timers(cls):
+        """Disable all Timers."""
+        cls.__enable = False
+    
+    @classmethod
+    def is_disabled(cls):
+        """Check, if disabled."""
+        return cls.__enable is False
+ 
+    @classmethod
+    def is_enabled(cls):
+        """Check, if enabled."""
+        return cls.__enable
+
 
 # Timer code
 class TimerError(Exception):
@@ -53,6 +77,8 @@ class Timer(ContextDecorator):
 
     def start(self) -> None:
         """Start a new timer."""
+        if TimerConfig.is_disabled():
+            return
         if self._start_time is not None:
             raise TimerError("Timer is running. Use .stop() to stop it")
 
@@ -70,6 +96,8 @@ class Timer(ContextDecorator):
 
     def stop(self) -> float:
         """Stop the timer, and report the elapsed time."""
+        if TimerConfig.is_disabled():
+            return 0
         if self._start_time is None:
             raise TimerError("Timer is not running. Use .start() to start it")
 
