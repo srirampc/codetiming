@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Callable, ClassVar, Optional, Union
 
 # Codetiming imports
-from codetiming._timers import Timers
+from ._timers import Timers
 
 # Special types, Protocol only works for Python >= 3.8
 if TYPE_CHECKING:  # pragma: nocover

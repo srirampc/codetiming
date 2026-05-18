@@ -22,7 +22,7 @@ You can use `codetiming.Timer` in several different ways:
 """
 
 # Codetiming imports
-from codetiming._timer import Timer, TimerError, TimerConfig
+from ._timer import Timer, TimerError, TimerConfig
 
 # Use __all__ to let type checkers know what is part of the public API.
 __all__ = ["Timer", "TimerError", "TimerConfig"]
